@@ -8,7 +8,7 @@
 #include "lem_in.h"
 #include "my.h"
 
-room_t *create_room(char const *name, vector_t pos)
+room_t *create_room(char const *name, int x, int y)
 {
     room_t *room = malloc(sizeof(*room));
 
@@ -16,7 +16,8 @@ room_t *create_room(char const *name, vector_t pos)
         room->linked = NULL;
         room->name = my_strdup(name);
         room->start = false;
-        room->pos = pos;
+        room->pos.x = x;
+        room->pos.y = y;
         room->end = false;
         room->ants = NULL;
     }
