@@ -22,18 +22,23 @@ typedef struct room
     char *name;
     vector_t pos;
     list_t *linked;
-    int ant;
+    bool start;
+    bool end;
+    list_t *ants;
 } room_t;
 
 typedef struct anthill
 {
     int nb_ants;
-    vector_t start;
-    vector_t end;
+    list_t *start;
+    list_t *end;
     list_t *rooms;
 } anthill_t;
 
 int lem_in(char * const *config);
 bool generate_anthill(anthill_t *anthill, char * const *config);
+
+room_t *create_room(char const *name, vector_t pos);
+void destroy_room(room_t *room);
 
 #endif

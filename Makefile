@@ -8,6 +8,7 @@
 SRC_NO_TEST			=	src/main.c
 
 SRC_TEST			=	src/lem_in.c			\
+						src/room.c				\
 						src/generate_anthill.c
 
 SRC					=	$(SRC_NO_TEST) $(SRC_TEST)

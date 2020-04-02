@@ -8,11 +8,32 @@
 #include "lem_in.h"
 #include "my.h"
 
-int lem_in(char * const *config)
+static anthill_t init_anthill(void)
 {
     anthill_t anthill;
 
+    anthill.nb_ants = 0;
+    anthill.rooms = NULL;
+    anthill.start = NULL;
+    anthill.end = NULL;
+    return (anthill);
+}
+
+static void destroy_anthill(anthill_t *anthill)
+{
+    list_t *node = NULL;
+
+    for (node = anthill->rooms; node != NULL; node = node->next)
+        destroy_room((room_t *)(node->data));
+    my_free_list(&anthill->rooms, false);
+}
+
+int lem_in(char * const *config)
+{
+    anthill_t anthill = init_anthill();
+
     if (config == NULL || !generate_anthill(&anthill, config))
         return (84);
+    destroy_anthill(&anthill);
     return (0);
 }
