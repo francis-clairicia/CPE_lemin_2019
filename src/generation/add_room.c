@@ -38,6 +38,7 @@ bool add_start_room(anthill_t *anthill, char * const *parsed_line)
         return (false);
     room->start = true;
     my_append_to_list(&anthill->rooms, (long)room);
+    anthill->start = my_node(anthill->rooms, -1);
     return (true);
 }
 
@@ -45,12 +46,13 @@ bool add_end_room(anthill_t *anthill, char * const *parsed_line)
 {
     room_t *room = NULL;
 
-    if (anthill->start != NULL)
+    if (anthill->end != NULL)
         return (false);
     room = create_room_from_params(parsed_line);
     if (room == NULL)
         return (false);
     room->end = true;
     my_append_to_list(&anthill->rooms, (long)room);
+    anthill->end = my_node(anthill->rooms, -1);
     return (true);
 }
