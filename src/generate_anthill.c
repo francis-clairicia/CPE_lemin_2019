@@ -11,22 +11,22 @@
 static const pointer_t func[] = {
 };
 
-void init_extremity_room(anthill_t *anthill, char **config, int *index, char **arg)
+bool init_extremity_room(anthill_t *anthill, char * const *config,
+    int *index, char **arg)
 {
-    vector_t vect;
     char **arg_next = NULL;
     bool ret = true;
 
-    if (my_strcmp(arg[*index], "##START") == 0) {
+    if (my_strcmp(arg[*index], "##start") == 0) {
         *index += 1;
         arg_next = my_str_to_word_array(config[*index], " ");
         ret = add_start_room(anthill, arg_next);
-    } else if (my_strcmp(arg[*index], "##END") == 0) {
+    } else if (my_strcmp(arg[*index], "##end") == 0) {
         *index += 1;
         arg_next = my_str_to_word_array(config[*index], " ");
         ret = add_end_room(anthill, arg_next);
     }
-    free(arg_next);
+    my_free_array(arg_next);
     return (ret);
 }
 

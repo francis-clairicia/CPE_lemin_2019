@@ -7,9 +7,12 @@
 
 SRC_NO_TEST			=	src/main.c
 
-SRC_TEST			=	src/lem_in.c			\
-						src/room.c				\
-						src/generate_anthill.c
+SRC_TEST			=	src/lem_in.c					\
+						src/room.c						\
+						src/generate_anthill.c			\
+						src/generation/add_room.c		\
+						src/generation/add_tunnel.c		\
+						src/generation/set_nb_ants.c
 
 SRC					=	$(SRC_NO_TEST) $(SRC_TEST)
 
