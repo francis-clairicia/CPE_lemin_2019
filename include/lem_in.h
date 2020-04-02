@@ -35,6 +35,15 @@ typedef struct anthill
     list_t *rooms;
 } anthill_t;
 
+enum line_kind {
+    EXTREMITY,
+    TUNNEL,
+    ROOM,
+    ROOM_NAMED
+};
+
+typedef void (*pointer_t)(anthill_t *, char **tab_arg, int *index);
+
 int lem_in(char * const *config);
 bool generate_anthill(anthill_t *anthill, char * const *config);
 
