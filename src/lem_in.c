@@ -21,11 +21,7 @@ static anthill_t init_anthill(void)
 
 static void destroy_anthill(anthill_t *anthill)
 {
-    list_t *node = NULL;
-
-    for (node = anthill->rooms; node != NULL; node = node->next)
-        destroy_room((room_t *)(node->data));
-    my_free_list(&anthill->rooms, false);
+    my_free_list(&anthill->rooms, &destroy_room);
 }
 
 int lem_in(char * const *config)

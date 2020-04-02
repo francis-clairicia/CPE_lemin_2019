@@ -16,6 +16,7 @@ room_t *create_room(char const *name, vector_t pos)
         room->linked = NULL;
         room->name = my_strdup(name);
         room->start = false;
+        room->pos = pos;
         room->end = false;
         room->ants = NULL;
     }
@@ -24,8 +25,8 @@ room_t *create_room(char const *name, vector_t pos)
 
 void destroy_room(room_t *room)
 {
-    my_free_list(&room->linked, false);
-    my_free_list(&room->ants, false);
+    my_free_list(&room->linked, NULL);
+    my_free_list(&room->ants, NULL);
     free(room->name);
     free(room);
 }
