@@ -10,22 +10,8 @@
 
 #include <stdbool.h>
 #include "mylist.h"
-
-typedef struct vector
-{
-    int x;
-    int y;
-} vector_t;
-
-typedef struct room
-{
-    char *name;
-    vector_t pos;
-    list_t *linked;
-    bool start;
-    bool end;
-    list_t *ants;
-} room_t;
+#include "room.h"
+#include "vector.h"
 
 typedef struct anthill
 {
@@ -42,12 +28,14 @@ enum line_kind {
     ROOM_NAMED
 };
 
-typedef void (*pointer_t)(anthill_t *, char **tab_arg, int *index);
-
 int lem_in(char * const *config);
 bool generate_anthill(anthill_t *anthill, char * const *config);
 
-room_t *create_room(char const *name, vector_t pos);
-void destroy_room(room_t *room);
+
+typedef bool (*pointer_t)(anthill_t *, char * const *);
+bool set_nb_ants(anthill_t *anthill, char const *number);
+bool add_simple_room(anthill_t *anthill, char * const *parsed_line);
+bool add_start_room(anthill_t *anthill, char * const *parsed_line);
+bool add_end_room(anthill_t *anthill, char * const * parsed_line);
 
 #endif
