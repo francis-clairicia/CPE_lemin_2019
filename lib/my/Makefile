@@ -44,7 +44,16 @@ SRC			=	my_put_nbr.c				\
 				convert_base.c				\
 				my_putnbr_base.c			\
 				my_getnbr_base.c			\
-				my_put_in_list.c			\
+				my_nbr_to_str.c				\
+				my_nbr_len.c				\
+				get_next_line.c				\
+				join_path.c					\
+				my_str_contains_only.c		\
+				my_memset.c					\
+				my_malloc_array.c			\
+				my_array_contains.c
+
+LINKED_LIST	=	my_put_in_list.c			\
 				my_append_to_list.c			\
 				my_list.c					\
 				my_list_to_str.c			\
@@ -54,15 +63,9 @@ SRC			=	my_put_nbr.c				\
 				my_concat_list.c			\
 				my_rev_list.c				\
 				my_node.c					\
+				my_find_node.c				\
 				my_delete_node.c			\
-				my_nbr_to_str.c				\
-				my_nbr_len.c				\
-				get_next_line.c				\
-				join_path.c					\
-				my_str_contains_only.c		\
-				my_memset.c					\
-				my_malloc_array.c			\
-				my_array_contains.c
+				my_delete_node_from.c
 
 PRINTF		=	printf/my_printf.c					\
 				printf/my_printf_number.c			\
@@ -85,7 +88,7 @@ CFLAGS		=	-Wall -Wextra
 
 override CPPFLAGS	+=	-I./ -I./printf
 
-OBJ	=	$(SRC:.c=.o) $(PRINTF:.c=.o)
+OBJ	=	$(SRC:.c=.o) $(LINKED_LIST:.c:.o) $(PRINTF:.c=.o)
 
 NAME	=	libmy.a
 

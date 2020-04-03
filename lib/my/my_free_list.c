@@ -15,7 +15,7 @@ void my_free_list(list_t **list, void (*free_function)())
         element = *list;
         *list = (*list)->next;
         if (free_function != NULL && (void *)(element->data) != NULL)
-            free((void *)(element->data));
+            free_function((void *)(element->data));
         free(element);
     }
 }

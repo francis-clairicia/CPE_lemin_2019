@@ -27,6 +27,8 @@ void my_rev_list(list_t *begin);
 char *my_list_to_str(list_t *list);
 char *my_concat_str_list(list_t *begin, char separator, int *len);
 list_t *my_node(list_t *begin, int index);
+list_t *my_node_from_data(list_t *begin, long data, int *index);
+list_t *my_find_node(list_t *list, list_t *node_to_find, int *index);
 void my_delete_node(list_t **list, int i, void (*free_function)());
 
 #endif
