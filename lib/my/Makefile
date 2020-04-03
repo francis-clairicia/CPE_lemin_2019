@@ -88,7 +88,7 @@ CFLAGS		=	-Wall -Wextra
 
 override CPPFLAGS	+=	-I./ -I./printf
 
-OBJ	=	$(SRC:.c=.o) $(LINKED_LIST:.c:.o) $(PRINTF:.c=.o)
+OBJ	=	$(SRC:.c=.o) $(LINKED_LIST:.c=.o) $(PRINTF:.c=.o)
 
 NAME	=	libmy.a
 
