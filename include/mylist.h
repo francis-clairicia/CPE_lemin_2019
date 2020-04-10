@@ -33,8 +33,8 @@ void my_delete_node(list_t **list, int i, void (*free_function)());
 void my_delete_node_from_data(list_t **list, long data, void (*free_func)());
 void my_delete_node_from_node(list_t **list, list_t *node, void (*free_func)());
 
-#define MY_APPEND_TO_LIST(list_ptr, data) my_append_to_list(list_ptr, (long)data)
-#define MY_PUT_IN_LIST(list_ptr, data) my_put_in_list(list_ptr, (long)data)
-#define NODE_DATA(node, cast) ((node != NULL) ? ((cast)(node->data)) : NULL)
+#define MY_APPEND_TO_LIST(list, data) my_append_to_list(list, (long)data)
+#define MY_PUT_IN_LIST(list, data) my_put_in_list(list, (long)data)
+#define NODE_DATA(node, cast) ((node != NULL) ? ((cast)(node->data)) : (cast)0)
 
 #endif
