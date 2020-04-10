@@ -11,16 +11,6 @@
 
 char **get_anthill(char const *file);
 
-Test(generate_anthill, fails_for_no_tunnels_set)
-{
-    anthill_t anthill = init_anthill();
-    char **file_content = get_anthill("no_tunnels");
-
-    cr_expect_eq(generate_anthill(&anthill, file_content), false);
-    my_free_array(file_content);
-    destroy_anthill(&anthill);
-}
-
 Test(generate_anthill, fails_for_bad_tunnel_separators)
 {
     anthill_t anthill = init_anthill();

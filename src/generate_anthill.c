@@ -87,8 +87,6 @@ bool generate_anthill(anthill_t *anthill, char * const *config)
         index += 1;
         my_free_array(arg);
     }
-    status &= (my_list_size(anthill->rooms) > 0);
-    status &= (my_list_size(anthill->known_tunnels) > 0);
     status &= (anthill->start != NULL) & (anthill->end != NULL);
     return (status);
 }
