@@ -16,22 +16,20 @@
 typedef struct anthill
 {
     int nb_ants;
-    list_t *start;
-    list_t *end;
+    room_t *start;
+    room_t *end;
     list_t *rooms;
+    list_t *known_tunnels;
 } anthill_t;
 
-enum line_kind {
-    EXTREMITY,
-    TUNNEL,
-    ROOM,
-    ROOM_NAMED
-};
-
 int lem_in(char * const *config);
-bool generate_anthill(anthill_t *anthill, char * const *config);
 
-typedef bool (*pointer_t)(anthill_t *, char * const *);
+anthill_t init_anthill(void);
+void destroy_anthill(anthill_t *anthill);
+bool generate_anthill(anthill_t *anthill, char * const *config);
+void print_anthill(anthill_t anthill);
+
+typedef bool (*setter_t)(anthill_t *, char * const *);
 bool set_nb_ants(anthill_t *anthill, char const *number);
 bool add_simple_room(anthill_t *anthill, char * const *parsed_line);
 bool add_start_room(anthill_t *anthill, char * const *parsed_line);

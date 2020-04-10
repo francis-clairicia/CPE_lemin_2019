@@ -8,7 +8,7 @@
 #include "lem_in.h"
 #include "my.h"
 
-static anthill_t init_anthill(void)
+anthill_t init_anthill(void)
 {
     anthill_t anthill;
 
@@ -16,20 +16,25 @@ static anthill_t init_anthill(void)
     anthill.rooms = NULL;
     anthill.start = NULL;
     anthill.end = NULL;
+    anthill.known_tunnels = NULL;
     return (anthill);
 }
 
-static void destroy_anthill(anthill_t *anthill)
+void destroy_anthill(anthill_t *anthill)
 {
     my_free_list(&anthill->rooms, &destroy_room);
+    my_free_list(&anthill->known_tunnels, &free);
 }
 
 int lem_in(char * const *config)
 {
     anthill_t anthill = init_anthill();
 
-    if (config == NULL || !generate_anthill(&anthill, config))
+    if (config == NULL || !generate_anthill(&anthill, config)) {
+        destroy_anthill(&anthill);
         return (84);
+    }
+    print_anthill(anthill);
     destroy_anthill(&anthill);
     return (0);
 }

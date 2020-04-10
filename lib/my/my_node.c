@@ -47,7 +47,7 @@ list_t *my_node_from_data(list_t *begin, long data, int *index)
     list_t *node = NULL;
 
     if (begin == NULL)
-        return;
+        return (NULL);
     for (node = begin; node != NULL && node->data != data; node = node->next)
         i += 1;
     if (index != NULL && node != NULL)
