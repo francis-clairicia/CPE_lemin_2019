@@ -29,12 +29,17 @@ void destroy_anthill(anthill_t *anthill)
 int lem_in(char * const *config)
 {
     anthill_t anthill = init_anthill();
+    bool generation_status = true;
 
-    if (config == NULL || !generate_anthill(&anthill, config)) {
+    if (config == NULL) {
         destroy_anthill(&anthill);
         return (84);
     }
+    generation_status = generate_anthill(&anthill, config);
     print_anthill(anthill);
+    if (generation_status == true) {
+        // call path_finding function
+    }
     destroy_anthill(&anthill);
-    return (0);
+    return ((generation_status == true) ? 0 : 84);
 }
