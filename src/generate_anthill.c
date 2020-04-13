@@ -72,12 +72,12 @@ static char **get_infos(char * const *config, int *index, setter_t *function)
 
 bool generate_anthill(anthill_t *anthill, char * const *config)
 {
-    int index = 1;
+    int index = 0;
     char **arg = NULL;
     bool status = true;
     setter_t setter = NULL;
 
-    if (config == NULL || anthill == NULL || !set_nb_ants(anthill, config[0]))
+    if (anthill == NULL || !set_nb_ants(anthill, config, &index))
         return (false);
     while (status == true && config[index] != NULL) {
         arg = get_infos(config, &index, &setter);

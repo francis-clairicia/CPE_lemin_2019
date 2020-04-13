@@ -26,6 +26,14 @@ void destroy_anthill(anthill_t *anthill)
     my_free_list(&anthill->known_tunnels, &free);
 }
 
+static void put_all_ants(anthill_t *anthill)
+{
+    int i = 0;
+
+    for (i = 1; i <= anthill->nb_ants; i += 1)
+        MY_APPEND_TO_LIST(&anthill->start->ants, i);
+}
+
 int lem_in(char * const *config)
 {
     anthill_t anthill = init_anthill();
@@ -38,7 +46,7 @@ int lem_in(char * const *config)
     generation_status = generate_anthill(&anthill, config);
     print_anthill(anthill);
     if (generation_status == true) {
-        // call path_finding function
+        put_all_ants(&anthill);
     }
     destroy_anthill(&anthill);
     return ((generation_status == true) ? 0 : 84);

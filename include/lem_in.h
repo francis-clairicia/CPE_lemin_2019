@@ -30,7 +30,7 @@ bool generate_anthill(anthill_t *anthill, char * const *config);
 void print_anthill(anthill_t anthill);
 
 typedef bool (*setter_t)(anthill_t *, char * const *);
-bool set_nb_ants(anthill_t *anthill, char const *number);
+bool set_nb_ants(anthill_t *anthill, char * const *config, int *index);
 bool add_simple_room(anthill_t *anthill, char * const *parsed_line);
 bool add_start_room(anthill_t *anthill, char * const *parsed_line);
 bool add_end_room(anthill_t *anthill, char * const * parsed_line);
