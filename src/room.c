@@ -24,6 +24,7 @@ room_t *create_room(char const *name, int x, int y)
         room->pos.x = x;
         room->pos.y = y;
         room->ants = NULL;
+        room->len_to_end = 0;
     }
     return (room);
 }

@@ -19,10 +19,12 @@ typedef struct room
     list_t *linked;
     bool start;
     bool end;
+    long int len_to_end;
     list_t *ants;
 } room_t;
 
 room_t *create_room(char const *name, int x, int y);
 void destroy_room(room_t *room);
+void go_to_end(room_t *end);
 
 #endif

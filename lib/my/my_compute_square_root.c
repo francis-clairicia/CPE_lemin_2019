@@ -13,9 +13,9 @@ int my_sqrt(int nb)
 
     if (nb <= 0)
         return (0);
-    while (my_compute_power_rec(sq, 2) < nb)
+    while (my_pow(sq, 2) < nb)
         sq += 1;
-    if (my_compute_power_rec(sq, 2) == nb)
+    if (my_pow(sq, 2) == nb)
         return (sq);
     return (sq - 1);
 }
