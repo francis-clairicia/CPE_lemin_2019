@@ -5,16 +5,13 @@
 ** heuritmics.c
 */
 
-#include "room.h"
-#include "mylist.h"
-#include "vector.h"
-#include "lem_in.h"
 #include "my.h"
+#include "lem_in.h"
 
-long int dist_to_end(vector_t pos, room_t *end)
+unsigned long int dist_to_end(vector_t room_pos, vector_t end_pos)
 {
-    end->len_to_end = 0;
+    unsigned long int x = my_pow(room_pos.x - end_pos.x, 2);
+    unsigned long int y = my_pow(room_pos.y - end_pos.y, 2);
 
-    return (my_sqrt
-    (my_pow(pos->x - end->pos->y) + my_pow(pos->y - end->pos->y)));
+    return (my_sqrt(x + y));
 }

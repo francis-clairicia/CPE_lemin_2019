@@ -6,34 +6,33 @@
 */
 
 #include "my.h"
-#include "room.h"
+#include "lem_in.h"
 
-room_t *closest_room(list_t *room, room_t *end, room_t *actual_room)
+static room_t *get_closest_empty_room(room_t *actual_room, room_t *end)
 {
-    room_t *keep_l = NULL;
-    unsigned int dte = 0;
-    unsigned int cp_dte = 0;
+    list_t *tmp = NULL;
+    room_t *room = NULL;
+    room_t *keep_l = NODE_DATA(actual_room->linked, room_t *);
+    unsigned long int dte = 0;
+    unsigned long int cp_dte = dist_to_end(keep_l->pos, end->pos);
 
-    go_to_end(end);
-    cp_dte = dist_to_end(actual_room->pos, end);
-    keep_l = room;
-    while (room != NULL)  {
-        dte = dist_to_end(actual_room->pos, end);
-        if (dte < cp_dte) {
+    for (tmp = actual_room->linked; tmp != NULL; tmp = tmp->next) {
+        room = NODE_DATA(tmp, room_t *);
+        dte = dist_to_end(room->pos, end->pos);
+        if (dte < cp_dte && (my_list_size(room->ants) == 0 || room->end)) {
             cp_dte = dte;
             keep_l = room;
         }
-        room = room->next;
     }
     return (keep_l);
 }
 
-void keep_track(list_t *list, room_t *end)
+room_t *keep_track(room_t *actual_room, room_t *end)
 {
-    room_t *actual_room;
-    list_t *tmp = actual_room->linked;
-    actual_room = NODE_DATA(list, room_t *);
+    room_t *closest_room = NULL;
 
-    closest_room(tmp, end, actual_room);
-    
+    if (actual_room == NULL || end == NULL)
+        return (NULL);
+    closest_room = get_closest_empty_room(actual_room, end);
+    return (closest_room);
 }

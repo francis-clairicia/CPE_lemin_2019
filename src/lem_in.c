@@ -17,6 +17,7 @@ anthill_t init_anthill(void)
     anthill.start = NULL;
     anthill.end = NULL;
     anthill.known_tunnels = NULL;
+    anthill.moves = NULL;
     return (anthill);
 }
 
@@ -47,6 +48,8 @@ int lem_in(char * const *config)
     print_anthill(anthill);
     if (generation_status == true) {
         put_all_ants(&anthill);
+        my_putstr("#moves\n");
+        a_star_algo(&anthill);
     }
     destroy_anthill(&anthill);
     return ((generation_status == true) ? 0 : 84);
