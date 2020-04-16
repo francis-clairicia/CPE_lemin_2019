@@ -6,6 +6,7 @@
 */
 
 #include "lem_in.h"
+#include "ant.h"
 #include "my.h"
 
 static void move_all_ants(anthill_t *anthill)
@@ -16,10 +17,11 @@ static void move_all_ants(anthill_t *anthill)
 
     for (node = anthill->rooms; node != NULL; node = node->next) {
         room = NODE_DATA(node, room_t *);
-        if (room->end)
+        if (my_list_size(room->ants) == 0 || room->end)
             continue;
         closest_room = keep_track(room, anthill->end);
-        move_ant(&anthill->moves, room, closest_room);
+        if (closest_room != NULL)
+            move_ant(&anthill->moves, room, closest_room);
     }
 }
 
@@ -33,13 +35,27 @@ static void print_moves(list_t *moves)
     }
 }
 
+static void permit_all_ants_to_move(list_t *rooms)
+{
+    list_t *n_room = NULL;
+    list_t *n_ant = NULL;
+    room_t *room = NULL;
+
+    for (n_room = rooms; n_room != NULL; n_room = n_room->next) {
+        room = NODE_DATA(n_room, room_t *);
+        for (n_ant = room->ants; n_ant != NULL; n_ant = n_ant->next)
+            NODE_DATA(n_ant, ant_t *)->can_move = true;
+    }
+}
+
 void a_star_algo(anthill_t *anthill)
 {
     if (anthill == NULL || anthill->start == NULL || anthill->end == NULL)
         return;
     while (my_list_size(anthill->end->ants) != anthill->nb_ants) {
-        my_free_list(&anthill->moves, &free);
         move_all_ants(anthill);
         print_moves(anthill->moves);
+        permit_all_ants_to_move(anthill->rooms);
+        my_free_list(&anthill->moves, &free);
     }
 }

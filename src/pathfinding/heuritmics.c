@@ -8,10 +8,12 @@
 #include "my.h"
 #include "lem_in.h"
 
-unsigned long int dist_to_end(vector_t room_pos, vector_t end_pos)
+unsigned int dist_to_end(vector_t room_pos, vector_t end_pos)
 {
-    unsigned long int x = my_pow(room_pos.x - end_pos.x, 2);
-    unsigned long int y = my_pow(room_pos.y - end_pos.y, 2);
+    int x = my_pow(room_pos.x - end_pos.x, 2);
+    int y = my_pow(room_pos.y - end_pos.y, 2);
 
+    if ((x + y) < 0)
+        return (0);
     return (my_sqrt(x + y));
 }

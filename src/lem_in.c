@@ -6,6 +6,7 @@
 */
 
 #include "lem_in.h"
+#include "ant.h"
 #include "my.h"
 
 anthill_t init_anthill(void)
@@ -32,7 +33,7 @@ static void put_all_ants(anthill_t *anthill)
     int i = 0;
 
     for (i = 1; i <= anthill->nb_ants; i += 1)
-        MY_APPEND_TO_LIST(&anthill->start->ants, i);
+        MY_APPEND_TO_LIST(&anthill->start->ants, create_ant(i));
 }
 
 int lem_in(char * const *config)

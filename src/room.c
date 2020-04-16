@@ -34,7 +34,7 @@ void destroy_room(room_t *room)
     if (room == NULL)
         return;
     my_free_list(&room->linked, NULL);
-    my_free_list(&room->ants, NULL);
+    my_free_list(&room->ants, &free);
     free(room->name);
     free(room);
 }
