@@ -8,24 +8,6 @@
 #include "my.h"
 #include "lem_in.h"
 
-static bool dead_end(room_t *room UNUSED)
-{
-    return (false);
-}
-
-static bool valid_room(room_t *room)
-{
-    if (room->end)
-        return (true);
-    if (my_list_size(room->ants) > 0)
-        return (false);
-    if (my_list_size(room->linked) == 1)
-        return (false);
-    if (dead_end(room))
-        return (false);
-    return (true);
-}
-
 static bool room_not_valid(list_t *invalid, room_t *room)
 {
     list_t *node = NULL;

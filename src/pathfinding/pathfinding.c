@@ -20,8 +20,11 @@ static void move_all_ants(anthill_t *anthill)
         if (my_list_size(room->ants) == 0 || room->end)
             continue;
         closest_room = keep_track(room, anthill->end);
-        if (closest_room != NULL)
-            move_ant(&anthill->moves, room, closest_room);
+        if (closest_room != NULL
+        && move_ant(&anthill->moves, room, closest_room)) {
+            move_all_ants(anthill);
+            break;
+        }
     }
 }
 

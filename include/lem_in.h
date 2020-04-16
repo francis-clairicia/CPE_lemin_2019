@@ -39,7 +39,8 @@ bool add_tunnel(anthill_t *anthill, char * const *parsed_line);
 
 void a_star_algo(anthill_t *anthill);
 room_t *keep_track(room_t *actual_room, room_t *end);
+bool valid_room(room_t *room);
 unsigned int dist_to_end(vector_t room_pos, vector_t end_pos);
-void move_ant(list_t **move_list, room_t *old, room_t *new);
+bool move_ant(list_t **move_list, room_t *old, room_t *new);
 
 #endif

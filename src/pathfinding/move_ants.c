@@ -44,14 +44,15 @@ static void add_move(list_t **move_list, int ant_id, char const *name)
     free(nb_ant);
 }
 
-void move_ant(list_t **move_list, room_t *old, room_t *new)
+bool move_ant(list_t **move_list, room_t *old, room_t *new)
 {
     ant_t *ant = get_ant(old->ants);
 
     if (ant == NULL)
-        return;
+        return (false);
     my_delete_node_from_data(&old->ants, (long)ant, NULL);
     MY_APPEND_TO_LIST(&new->ants, ant);
     ant->can_move = false;
     add_move(move_list, ant->id, new->name);
+    return (true);
 }
