@@ -5,7 +5,7 @@
 ** Returns the power of a number
 */
 
-int my_compute_power_rec(int nb, int p)
+int my_pow(int nb, int p)
 {
     int power_down = 0;
 
