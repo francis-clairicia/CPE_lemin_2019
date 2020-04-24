@@ -8,19 +8,6 @@
 #include "lem_in.h"
 #include "my.h"
 
-static room_t *find_room_by_name(list_t *rooms, char const *name)
-{
-    list_t *node = NULL;
-    room_t *room = NULL;
-
-    for (node = rooms; node != NULL; node = node->next) {
-        room = NODE_DATA(node, room_t *);
-        if (my_strcmp(room->name, name) == 0)
-            return (room);
-    }
-    return (NULL);
-}
-
 static char *make_tunnel(char * const *line)
 {
     int size = my_strlen(line[0]) + 1 + my_strlen(line[1]);

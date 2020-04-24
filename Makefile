@@ -7,17 +7,19 @@
 
 SRC_NO_TEST			=	src/main.c
 
-SRC_TEST			=	src/lem_in.c					\
-						src/room.c						\
-						src/generate_anthill.c			\
-						src/generation/add_room.c		\
-						src/generation/add_tunnel.c		\
-						src/generation/set_nb_ants.c	\
-						src/print_anthill.c				\
-						src/pathfinding/pathfinding.c	\
-						src/pathfinding/keep_track.c	\
-						src/pathfinding/valid_room.c	\
-						src/pathfinding/move_ants.c		\
+SRC_TEST			=	src/lem_in.c						\
+						src/room.c							\
+						src/generate_anthill.c				\
+						src/generation/add_room.c			\
+						src/generation/add_tunnel.c			\
+						src/generation/set_nb_ants.c		\
+						src/generation/error_check.c		\
+						src/generation/find_room_by.c		\
+						src/print_anthill.c					\
+						src/pathfinding/pathfinding.c		\
+						src/pathfinding/keep_track.c		\
+						src/pathfinding/valid_room.c		\
+						src/pathfinding/move_ants.c			\
 						src/pathfinding/heuritmics.c
 
 SRC					=	$(SRC_NO_TEST) $(SRC_TEST)

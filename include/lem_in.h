@@ -36,6 +36,9 @@ bool add_simple_room(anthill_t *anthill, char * const *parsed_line);
 bool add_start_room(anthill_t *anthill, char * const *parsed_line);
 bool add_end_room(anthill_t *anthill, char * const * parsed_line);
 bool add_tunnel(anthill_t *anthill, char * const *parsed_line);
+room_t *find_room_by_name(list_t *rooms, char const *name);
+room_t *find_room_by_pos(list_t *rooms, int x, int y);
+bool error_generation(anthill_t *anthill);
 
 void a_star_algo(anthill_t *anthill);
 room_t *keep_track(room_t *actual_room, room_t *end);

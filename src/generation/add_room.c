@@ -8,18 +8,27 @@
 #include "lem_in.h"
 #include "my.h"
 
-static room_t *create_room_from_params(char * const *params)
+static room_t *create_room_from_params(list_t *rooms, char * const *params)
 {
+    int x = 0;
+    int y = 0;
+
     if (my_array_len(params) != 3)
+        return (NULL);
+    if (find_room_by_name(rooms, params[0]) != NULL)
         return (NULL);
     if (!my_str_isnum(params[1]) || !my_str_isnum(params[2]))
         return (NULL);
-    return (create_room(params[0], my_getnbr(params[1]), my_getnbr(params[2])));
+    x = my_getnbr(params[1]);
+    y = my_getnbr(params[2]);
+    if (find_room_by_pos(rooms, x, y) != NULL)
+        return (NULL);
+    return (create_room(params[0], x, y));
 }
 
 bool add_simple_room(anthill_t *anthill, char * const *parsed_line)
 {
-    room_t *room = create_room_from_params(parsed_line);
+    room_t *room = create_room_from_params(anthill->rooms, parsed_line);
 
     if (room == NULL)
         return (false);
@@ -33,7 +42,7 @@ bool add_start_room(anthill_t *anthill, char * const *parsed_line)
 
     if (anthill->start != NULL)
         return (false);
-    room = create_room_from_params(parsed_line);
+    room = create_room_from_params(anthill->rooms, parsed_line);
     if (room == NULL)
         return (false);
     room->start = true;
@@ -48,7 +57,7 @@ bool add_end_room(anthill_t *anthill, char * const *parsed_line)
 
     if (anthill->end != NULL)
         return (false);
-    room = create_room_from_params(parsed_line);
+    room = create_room_from_params(anthill->rooms, parsed_line);
     if (room == NULL)
         return (false);
     room->end = true;
