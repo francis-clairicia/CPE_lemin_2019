@@ -20,7 +20,7 @@ Test(print_anthill, print_a_recap_of_anthill_generation)
     char **input = get_anthill("normal_2");
 
     cr_redirect_stdout();
-    cr_expect_eq(generate_anthill(&anthill, input), true);
+    cr_expect_eq(generate_anthill(&anthill, input), false);
     print_anthill(anthill);
     cr_expect_stdout_eq(output);
     my_free_array(input);
@@ -35,7 +35,7 @@ Test(generate_anthill, handle_comments_inside_file)
     char **input = get_anthill("normal_2_comments_inside");
 
     cr_redirect_stdout();
-    cr_expect_eq(generate_anthill(&anthill, input), true);
+    cr_expect_eq(generate_anthill(&anthill, input), false);
     print_anthill(anthill);
     cr_expect_stdout_eq(output);
     my_free_array(input);

@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include "mylist.h"
 #include "room.h"
+#include "ant.h"
 #include "vector.h"
 
 typedef struct anthill
@@ -19,6 +20,7 @@ typedef struct anthill
     room_t *start;
     room_t *end;
     list_t *rooms;
+    list_t *ants;
     list_t *known_tunnels;
     list_t *moves;
 } anthill_t;
@@ -41,9 +43,10 @@ room_t *find_room_by_pos(list_t *rooms, int x, int y);
 bool error_generation(anthill_t *anthill);
 
 void a_star_algo(anthill_t *anthill);
-room_t *keep_track(room_t *actual_room, room_t *end);
+room_t *keep_track(ant_t *ant, room_t *actual_room, room_t *end);
+list_t *select_room(ant_t *ant, list_t *room_list, int nb_passages);
 bool valid_room(room_t *room);
 unsigned int dist_to_end(vector_t room_pos, vector_t end_pos);
-bool move_ant(list_t **move_list, room_t *old, room_t *new);
+bool move_ant(list_t **move_list, ant_t *ant, room_t *old, room_t *new);
 
 #endif

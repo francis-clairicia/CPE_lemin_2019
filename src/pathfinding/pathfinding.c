@@ -6,7 +6,6 @@
 */
 
 #include "lem_in.h"
-#include "ant.h"
 #include "my.h"
 
 static void move_all_ants(anthill_t *anthill)
@@ -14,17 +13,15 @@ static void move_all_ants(anthill_t *anthill)
     room_t *room = NULL;
     list_t *node = NULL;
     room_t *closest_room = NULL;
+    ant_t *ant = NULL;
 
-    for (node = anthill->rooms; node != NULL; node = node->next) {
-        room = NODE_DATA(node, room_t *);
-        if (my_list_size(room->ants) == 0 || room->end)
+    for (node = anthill->ants; node != NULL; node = node->next) {
+        ant = NODE_DATA(node, ant_t *);
+        room = NODE_DATA(my_node(ant->rooms_visited, -1), room_t *);
+        if (room->end || ant == NULL)
             continue;
-        closest_room = keep_track(room, anthill->end);
-        if (closest_room != NULL
-        && move_ant(&anthill->moves, room, closest_room)) {
-            move_all_ants(anthill);
-            break;
-        }
+        closest_room = keep_track(ant, room, anthill->end);
+        move_ant(&anthill->moves, ant, room, closest_room);
     }
 }
 
@@ -38,16 +35,12 @@ static void print_moves(list_t *moves)
     }
 }
 
-static void permit_all_ants_to_move(list_t *rooms)
+static void permit_all_ants_to_move(list_t *ants)
 {
-    list_t *n_room = NULL;
-    list_t *n_ant = NULL;
-    room_t *room = NULL;
+    list_t *node = NULL;
 
-    for (n_room = rooms; n_room != NULL; n_room = n_room->next) {
-        room = NODE_DATA(n_room, room_t *);
-        for (n_ant = room->ants; n_ant != NULL; n_ant = n_ant->next)
-            NODE_DATA(n_ant, ant_t *)->can_move = true;
+    for (node = ants; node != NULL; node = node->next) {
+        NODE_DATA(node, ant_t *)->can_move = true;
     }
 }
 
@@ -58,7 +51,7 @@ void a_star_algo(anthill_t *anthill)
     while (my_list_size(anthill->end->ants) != anthill->nb_ants) {
         move_all_ants(anthill);
         print_moves(anthill->moves);
-        permit_all_ants_to_move(anthill->rooms);
+        permit_all_ants_to_move(anthill->ants);
         my_free_list(&anthill->moves, &free);
     }
 }

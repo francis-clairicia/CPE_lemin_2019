@@ -25,6 +25,8 @@ bool add_tunnel(anthill_t *anthill, char * const *parsed_line)
 
     if (my_array_len(parsed_line) != 2)
         return (false);
+    if (my_strcmp(parsed_line[0], parsed_line[1]) == 0)
+        return (false);
     first = find_room_by_name(anthill->rooms, parsed_line[0]);
     second = find_room_by_name(anthill->rooms, parsed_line[1]);
     if (first == NULL || second == NULL)

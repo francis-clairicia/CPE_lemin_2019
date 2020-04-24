@@ -7,12 +7,11 @@
 
 #include "my.h"
 #include "lem_in.h"
-#include "ant.h"
 #include "mylist.h"
 #include "room.h"
 #include "vector.h"
 
-static ant_t *get_ant(list_t *ants)
+ant_t *get_ant_who_will_move(list_t *ants)
 {
     list_t *node = NULL;
     ant_t *ant = NULL;
@@ -44,15 +43,14 @@ static void add_move(list_t **move_list, int ant_id, char const *name)
     free(nb_ant);
 }
 
-bool move_ant(list_t **move_list, room_t *old, room_t *new)
+bool move_ant(list_t **move_list, ant_t *ant, room_t *old, room_t *new)
 {
-    ant_t *ant = get_ant(old->ants);
-
-    if (ant == NULL)
+    if (ant == NULL || old == NULL || new == NULL)
         return (false);
     my_delete_node_from_data(&old->ants, (long)ant, NULL);
     MY_APPEND_TO_LIST(&new->ants, ant);
     ant->can_move = false;
+    MY_APPEND_TO_LIST(&ant->rooms_visited, new);
     add_move(move_list, ant->id, new->name);
     return (true);
 }

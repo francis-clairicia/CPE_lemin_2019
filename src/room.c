@@ -6,6 +6,7 @@
 */
 
 #include "lem_in.h"
+#include "ant.h"
 #include "my.h"
 
 room_t *create_room(char const *name, int x, int y)
@@ -34,7 +35,7 @@ void destroy_room(room_t *room)
     if (room == NULL)
         return;
     my_free_list(&room->linked, NULL);
-    my_free_list(&room->ants, &free);
+    my_free_list(&room->ants, NULL);
     free(room->name);
     free(room);
 }

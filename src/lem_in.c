@@ -15,6 +15,7 @@ anthill_t init_anthill(void)
 
     anthill.nb_ants = 0;
     anthill.rooms = NULL;
+    anthill.ants = NULL;
     anthill.start = NULL;
     anthill.end = NULL;
     anthill.known_tunnels = NULL;
@@ -24,6 +25,7 @@ anthill_t init_anthill(void)
 
 void destroy_anthill(anthill_t *anthill)
 {
+    my_free_list(&anthill->ants, &destroy_ant);
     my_free_list(&anthill->rooms, &destroy_room);
     my_free_list(&anthill->known_tunnels, &free);
 }
@@ -31,9 +33,16 @@ void destroy_anthill(anthill_t *anthill)
 static void put_all_ants(anthill_t *anthill)
 {
     int i = 0;
+    ant_t *ant = NULL;
 
-    for (i = 1; i <= anthill->nb_ants; i += 1)
-        MY_APPEND_TO_LIST(&anthill->start->ants, create_ant(i));
+    for (i = 1; i <= anthill->nb_ants; i += 1) {
+        ant = create_ant(i);
+        if (ant == NULL)
+            break;
+        MY_APPEND_TO_LIST(&ant->rooms_visited, anthill->start);
+        MY_APPEND_TO_LIST(&anthill->start->ants, ant);
+        MY_APPEND_TO_LIST(&anthill->ants, ant);
+    }
 }
 
 int lem_in(char * const *config)

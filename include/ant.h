@@ -9,22 +9,18 @@
 #define HEADER_LEMIN_ANT
 
 #include <stdlib.h>
+#include <stdbool.h>
+#include "mylist.h"
 
 typedef struct ant
 {
     unsigned int id;
+    list_t *rooms_visited;
     bool can_move;
 } ant_t;
 
-static inline ant_t *create_ant(unsigned int id)
-{
-    ant_t *ant = malloc(sizeof(ant_t));
-
-    if (ant != NULL) {
-        ant->id = id;
-        ant->can_move = true;
-    }
-    return (ant);
-}
+ant_t *create_ant(unsigned int id);
+void destroy_ant(ant_t *ant);
+ant_t *get_ant_who_will_move(list_t *ants);
 
 #endif

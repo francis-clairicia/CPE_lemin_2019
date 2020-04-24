@@ -9,6 +9,7 @@ SRC_NO_TEST			=	src/main.c
 
 SRC_TEST			=	src/lem_in.c						\
 						src/room.c							\
+						src/ant.c							\
 						src/generate_anthill.c				\
 						src/generation/add_room.c			\
 						src/generation/add_tunnel.c			\
@@ -19,6 +20,7 @@ SRC_TEST			=	src/lem_in.c						\
 						src/pathfinding/pathfinding.c		\
 						src/pathfinding/keep_track.c		\
 						src/pathfinding/valid_room.c		\
+						src/pathfinding/select_rooms.c		\
 						src/pathfinding/move_ants.c			\
 						src/pathfinding/heuritmics.c
 
